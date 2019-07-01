@@ -127,14 +127,14 @@
 
     var socket = io.connect();
 
+
     let enemyShipsArr = {};
-
-
 
 
     socket.on('new ships', (data1, data2)=>{
         enemyShipsArr.ship1 = data1.ship1;
         enemyShipsArr.ship2 = data2.ship2;
+        
     });
 
 
@@ -198,6 +198,12 @@
         }
     }
 
+    let yourShipsList = {};
+    yourShipsList.ship1 = tr_ship_1_arr;
+    yourShipsList.ship2 = tr_ship_2_arr;
+
+
+
     let enemyShipsList = [];
 
 
@@ -206,9 +212,8 @@
         socket.emit('send ships', tr_ship_1_arr, tr_ship_2_arr);
 
         document.getElementById('field2').style.display = 'block';
-        document.getElementById('turn').style.display = 'block';
+        // document.getElementById('turn').style.display = 'block';------------
         
-        // enemyShipsList = enemyShipsArr.ship1.concat(enemyShipsArr.ship2);
 
         // if(enemyShipsArr.ship1.concat(enemyShipsArr.ship2)===undefined){
         //     document.getElementById('turn').innerText='Your turn';
@@ -229,15 +234,23 @@
         
     }
 
-
+    let checkWinArr = [];
 
     function turn(){
 
-        document.getElementById('turn').innerText='Enemy turn';
+
+        // document.getElementById('turn').innerText='Enemy turn'; -------------------------
         
         socket.emit('send ships', tr_ship_1_arr, tr_ship_2_arr);
 
+        enemyShipsList = enemyShipsArr.ship1.concat(enemyShipsArr.ship2);
         
+
+        if(checkWinArr.length===enemyShipsList.length){
+            // document.getElementById('win_text').style.display='block';
+            alert('You win!');
+        }
+
         // Array.from(document.getElementsByClassName("cell_2"))
         // .forEach((element) => {
         //     element.onclick = 
@@ -260,7 +273,7 @@
 
     function battle(el) {
         
-        let checkWinArr = [];
+        // let checkWinArr = [];
 
         
 
@@ -268,14 +281,9 @@
             document.getElementById(el).style.backgroundColor='red';
             checkWinArr.push(el.slice(0,7)+'_1');
 
-            document.getElementById('turn').innerText='Your turn';
-
-            // if(checkWinArr.length>=enemyShipsList.length){
-            //     document.getElementById('win_text').style.display='block';
-            // }
-            // else{
-            //     document.getElementById('lose_text').style.display='block'; 
-            // }
+            // document.getElementById('turn').innerText='Your turn'; ------------------
+            
+            
         }
         else if(enemyShipsArr.ship1.indexOf(el.slice(0,7)+'_1') <= 0 || enemyShipsArr.ship2.indexOf(el.slice(0,7)+'_1') <= 0){
             document.getElementById(el).style.backgroundColor='gray';
