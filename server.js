@@ -6,7 +6,9 @@ const server = require("http").createServer(app);
 const io = require("socket.io").listen(server);
 
 let users = [];
-connections = [];
+let connections = [];
+
+
 server.listen(process.env.PORT || 3000);
 console.log("server running");
 
