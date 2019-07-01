@@ -1,0 +1,32 @@
+.container {
+  width: 80%;
+  height: auto;
+  margin: 50px auto;
+}
+.fields {
+  display: flex;
+  justify-content: space-between;
+}
+.row {
+  display: flex;
+}
+.cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #000;
+}
+.pick_ship {
+  margin-top: 20px;
+}
+#start_game {
+  margin-top: 20px;
+}
+#field2 {
+  display: none;
+}
+#win_text{
+  display: none;
+}
+#lose_text{
+  display: none;
+}

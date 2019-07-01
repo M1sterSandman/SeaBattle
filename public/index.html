@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sea Battle</title>
+
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="reset.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>   
+
+    <!-- <script src="main.js" type="text/javascript"></script> -->
+
+
+</head>
+<body>
+
+<div class="container">
+    <div class="fields">
+        <div class="field" id="field1">
+            <h2>Your ships</h2>
+            <div class="row" id="row1_1">
+                <div class="cell cell_1_1" id="cell_11_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_1_1" id="cell_12_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_1_1" id="cell_13_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_1_1" id="cell_14_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_1_1" id="cell_15_1" onclick="fun(this.id)"></div>
+            </div>
+            <div class="row" id="row2_1">
+                <div class="cell cell_2_1" id="cell_21_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_2_1" id="cell_22_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_2_1" id="cell_23_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_2_1" id="cell_24_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_2_1" id="cell_25_1" onclick="fun(this.id)"></div>
+            </div>
+            <div class="row" id="row3_1">
+                <div class="cell cell_3_1" id="cell_31_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_3_1" id="cell_32_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_3_1" id="cell_33_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_3_1" id="cell_34_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_3_1" id="cell_35_1" onclick="fun(this.id)"></div>
+            </div>
+            <div class="row" id="row4_1">
+                <div class="cell cell_4_1" id="cell_41_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_4_1" id="cell_42_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_4_1" id="cell_43_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_4_1" id="cell_44_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_4_1" id="cell_45_1" onclick="fun(this.id)"></div>
+            </div>
+            <div class="row" id="row5_1">
+                <div class="cell cell_5_1" id="cell_51_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_5_1" id="cell_52_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_5_1" id="cell_53_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_5_1" id="cell_54_1" onclick="fun(this.id)"></div>
+                <div class="cell cell_5_1" id="cell_55_1" onclick="fun(this.id)"></div>
+            </div>
+        </div>
+
+        <!--_______ENEMY-->
+        <div class="field" id="field2">
+            <h3>Enemy ships</h3>
+            <div class="row" id="row1_2">
+                <div class="cell cell_1_2" id="cell_11_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_1_2" id="cell_12_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_1_2" id="cell_13_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_1_2" id="cell_14_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_1_2" id="cell_15_2" onclick="battle(this.id)"></div>
+            </div>
+            <div class="row" id="row2_2">
+                <div class="cell cell_2_2" id="cell_21_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2_2" id="cell_22_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2_2" id="cell_23_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2_2" id="cell_24_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2_2" id="cell_25_2" onclick="battle(this.id)"></div>
+            </div>
+            <div class="row" id="row3_2">
+                <div class="cell cell_3_2" id="cell_31_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_3_2" id="cell_32_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_3_2" id="cell_33_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_3_2" id="cell_34_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_3_2" id="cell_35_2" onclick="battle(this.id)"></div>
+            </div>
+            <div class="row" id="row4_2">
+                <div class="cell cell_4_2" id="cell_41_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_4_2" id="cell_42_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_4_2" id="cell_43_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_4_2" id="cell_44_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_4_2" id="cell_45_2" onclick="battle(this.id)"></div>
+            </div>
+            <div class="row" id="row5_2">
+                <div class="cell cell_5_2" id="cell_51_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_5_2" id="cell_52_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_5_2" id="cell_53_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_5_2" id="cell_54_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_5_2" id="cell_55_2" onclick="battle(this.id)"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="pick_ship">
+        <button id="tr_ship_1" onclick="tr_ship_1()">Triple ship 1</button>
+        <button id="tr_ship_2" onclick="tr_ship_2()">Triple ship 2</button>
+    </div>
+    <div id="status"></div>
+    <button id="start_game" disabled onclick="startGame()">Start game</button>
+
+    <h1 id="win_text">You are win</h1>
+    <h1 id="lose_text">You are lose</h1>    
+
+</div>
+
+<!--<script src="main.js" type="text/javascript"></script>-->
+
+<script>
+   
+
+    var socket = io.connect();
+
+    let enemyShipsArr = {};
+
+    
+    socket.on('new ships', (data1, data2)=>{
+        enemyShipsArr.ship1 = data1.ship1;
+        enemyShipsArr.ship2 = data2.ship2;
+    });
+
+
+    let tr_ship_1_check = false;
+    let tr_ship_2_check = false;
+    let tr_ship_1_arr = [];
+    let tr_ship_2_arr = [];
+
+    function fun(el) {
+        if (tr_ship_1_check === true){
+            
+            tr_ship_1_arr.push(el);
+            if (tr_ship_1_arr.length>2){
+                document.getElementById('status').innerText = 'ship was set';
+                tr_ship_1_check = false;
+                document.getElementById('tr_ship_1').disabled = true;
+            }
+            if (tr_ship_1_arr.length===3) {
+                set_ship1();
+            }
+        }
+
+        if (tr_ship_2_check === true){
+            tr_ship_2_arr.push(el);
+            if (tr_ship_2_arr.length>2){
+                document.getElementById('status').innerText = 'ship was set';
+                tr_ship_2_check = false;
+                document.getElementById('tr_ship_2').disabled = true;
+            }
+            if (tr_ship_2_arr.length===3){
+                set_ship2();
+            }
+        }
+    }
+
+    function tr_ship_1() {
+        tr_ship_1_check = true;
+        document.getElementById('status').innerText = 'choose 3 cell';
+    }
+    function tr_ship_2() {
+        tr_ship_2_check = true;
+        document.getElementById('status').innerText = 'choose 3 cell';
+    }
+
+    function set_ship1() {
+        tr_ship_1_arr.forEach((el)=>{
+            document.getElementById(el).style.backgroundColor='black';
+        });
+        checkArraysBeforeStart();
+    }
+    function set_ship2() {
+        tr_ship_2_arr.forEach((el)=>{
+            document.getElementById(el).style.backgroundColor='black';
+        });
+        checkArraysBeforeStart();
+    }
+
+    function checkArraysBeforeStart() {
+        if (tr_ship_1_arr.length===3 && tr_ship_2_arr.length===3){
+            document.getElementById('start_game').disabled = false;
+        }
+    }
+
+    let enemyShipsList = [];
+
+
+    function startGame() {
+
+        socket.emit('send ships', tr_ship_1_arr, tr_ship_2_arr);
+
+        // document.getElementById('start_game').textContent = 'Took a step';
+        document.getElementById('field2').style.display = 'block';
+        
+        enemyShipsList = enemyShipsArr.ship1.concat(enemyShipsArr.ship2);
+        
+    }
+
+
+    function battle(el) {
+        let checkWinArr = [];
+
+        startGame();
+
+        if(enemyShipsArr.ship1.indexOf(el.slice(0,7)+'_1') >= 0 || enemyShipsArr.ship2.indexOf(el.slice(0,7)+'_1') >= 0){
+            document.getElementById(el).style.backgroundColor='red';
+            checkWinArr.push(el.slice(0,7)+'_1');
+
+            // if(checkWinArr.length>=enemyShipsList.length){
+            //     document.getElementById('win_text').style.display='block';
+            // }
+            // else{
+            //     document.getElementById('lose_text').style.display='block'; 
+            // }
+        }
+        else{
+            document.getElementById(el).style.backgroundColor='gray';
+        }
+
+    }
+
+      
+</script>
+
+</body>
+</html>
