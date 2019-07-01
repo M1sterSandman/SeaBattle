@@ -24,9 +24,18 @@
 #field2 {
   display: none;
 }
-#win_text{
+#win_text {
   display: none;
 }
-#lose_text{
+#lose_text {
   display: none;
+}
+#turn {
+  display: none;
+}
+.cell_disabled {
+  pointer-events: none;
+}
+.cell_enabled {
+  pointer-events: auto;
 }

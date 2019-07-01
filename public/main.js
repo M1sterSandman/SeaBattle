@@ -73,5 +73,5 @@ function battle(el) {
     else{
         document.getElementById(el).style.backgroundColor='gray';
     }
-
+    
 }

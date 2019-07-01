@@ -15,6 +15,8 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="socket.io/socket.io.js"></script>   
 
+    <script src="generate_fields.js" defer></script>
+
     <!-- <script src="main.js" type="text/javascript"></script> -->
 
 
@@ -66,39 +68,39 @@
         <div class="field" id="field2">
             <h3>Enemy ships</h3>
             <div class="row" id="row1_2">
-                <div class="cell cell_1_2" id="cell_11_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_1_2" id="cell_12_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_1_2" id="cell_13_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_1_2" id="cell_14_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_1_2" id="cell_15_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_11_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_12_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_13_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_14_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_15_2" onclick="battle(this.id)"></div>
             </div>
             <div class="row" id="row2_2">
-                <div class="cell cell_2_2" id="cell_21_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_2_2" id="cell_22_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_2_2" id="cell_23_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_2_2" id="cell_24_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_2_2" id="cell_25_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_21_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_22_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_23_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_24_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_25_2" onclick="battle(this.id)"></div>
             </div>
             <div class="row" id="row3_2">
-                <div class="cell cell_3_2" id="cell_31_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_3_2" id="cell_32_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_3_2" id="cell_33_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_3_2" id="cell_34_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_3_2" id="cell_35_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_31_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_32_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_33_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_34_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_35_2" onclick="battle(this.id)"></div>
             </div>
             <div class="row" id="row4_2">
-                <div class="cell cell_4_2" id="cell_41_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_4_2" id="cell_42_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_4_2" id="cell_43_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_4_2" id="cell_44_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_4_2" id="cell_45_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_41_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_42_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_43_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_44_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_45_2" onclick="battle(this.id)"></div>
             </div>
             <div class="row" id="row5_2">
-                <div class="cell cell_5_2" id="cell_51_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_5_2" id="cell_52_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_5_2" id="cell_53_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_5_2" id="cell_54_2" onclick="battle(this.id)"></div>
-                <div class="cell cell_5_2" id="cell_55_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_51_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_52_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_53_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_54_2" onclick="battle(this.id)"></div>
+                <div class="cell cell_2" id="cell_55_2" onclick="battle(this.id)"></div>
             </div>
 
         </div>
@@ -110,6 +112,8 @@
     </div>
     <div id="status"></div>
     <button id="start_game" disabled onclick="startGame()">Start game</button>
+
+    <h1 id="turn">Your turn</h1>
 
     <h1 id="win_text">You are win</h1>
     <h1 id="lose_text">You are lose</h1>    
@@ -125,7 +129,9 @@
 
     let enemyShipsArr = {};
 
-    
+
+
+
     socket.on('new ships', (data1, data2)=>{
         enemyShipsArr.ship1 = data1.ship1;
         enemyShipsArr.ship2 = data2.ship2;
@@ -199,22 +205,70 @@
 
         socket.emit('send ships', tr_ship_1_arr, tr_ship_2_arr);
 
-        // document.getElementById('start_game').textContent = 'Took a step';
         document.getElementById('field2').style.display = 'block';
+        document.getElementById('turn').style.display = 'block';
         
-        enemyShipsList = enemyShipsArr.ship1.concat(enemyShipsArr.ship2);
+        // enemyShipsList = enemyShipsArr.ship1.concat(enemyShipsArr.ship2);
+
+        // if(enemyShipsArr.ship1.concat(enemyShipsArr.ship2)===undefined){
+        //     document.getElementById('turn').innerText='Your turn';
+        // }
+        // else{
+        //     document.getElementById('turn').innerText='Enemy turn';
+        // }
+
+        // Array.from(document.getElementsByClassName("cell_2"))
+        // .forEach((element) => {
+        //     element.onclick = 
+        //     function (event) {
+        //         document.getElementById('turn').innerText='Your turn';
+        //         element.classList.remove('cell_disabled');
+        //         console.log(event);
+        //     }
+        // });
         
     }
 
 
+
+    function turn(){
+
+        document.getElementById('turn').innerText='Enemy turn';
+        
+        socket.emit('send ships', tr_ship_1_arr, tr_ship_2_arr);
+
+        
+        // Array.from(document.getElementsByClassName("cell_2"))
+        // .forEach((element) => {
+        //     element.onclick = 
+        //     function (event) {
+        //         document.getElementById('turn').innerText='Your turn';
+        //         element.classList.remove('cell_disabled');
+                
+        //     }
+        // });
+
+        // Array.from(document.getElementsByClassName("cell_2"))
+        // .forEach((element) => {
+        //     element.addEventListener('click', (event)=>{
+        //         element.classList.remove('cell_disabled');
+        //     })
+        // });
+            
+    }
+
+
     function battle(el) {
+        
         let checkWinArr = [];
 
-        startGame();
+        
 
         if(enemyShipsArr.ship1.indexOf(el.slice(0,7)+'_1') >= 0 || enemyShipsArr.ship2.indexOf(el.slice(0,7)+'_1') >= 0){
             document.getElementById(el).style.backgroundColor='red';
             checkWinArr.push(el.slice(0,7)+'_1');
+
+            document.getElementById('turn').innerText='Your turn';
 
             // if(checkWinArr.length>=enemyShipsList.length){
             //     document.getElementById('win_text').style.display='block';
@@ -223,8 +277,19 @@
             //     document.getElementById('lose_text').style.display='block'; 
             // }
         }
-        else{
+        else if(enemyShipsArr.ship1.indexOf(el.slice(0,7)+'_1') <= 0 || enemyShipsArr.ship2.indexOf(el.slice(0,7)+'_1') <= 0){
             document.getElementById(el).style.backgroundColor='gray';
+            // Array.from(document.getElementsByClassName("cell_2"))
+            // .forEach((element) => {
+            //     element.onclick = 
+            //     function (event) {
+            //         event.preventDefault();
+            //         element.classList.add('cell_disabled');
+            //     }
+            // });
+
+            turn();  
+            
         }
 
     }
