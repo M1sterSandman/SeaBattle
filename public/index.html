@@ -245,6 +245,11 @@
     let checkWinArr = [];
 
     function turn(){
+        if(enemyShipsArr.ship1!==undefined){
+            enemyShipsList = enemyShipsArr.ship1.concat(enemyShipsArr.ship2);
+            
+        }
+        
 
 
         // document.getElementById('turn').innerText='Enemy turn'; -------------------------
