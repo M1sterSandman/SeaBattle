@@ -130,11 +130,11 @@
 
     let enemyShipsArr = {};
 
+    
 
     socket.on('new ships', (data1, data2)=>{
         enemyShipsArr.ship1 = data1.ship1;
         enemyShipsArr.ship2 = data2.ship2;
-        
     });
 
 
@@ -211,6 +211,14 @@
 
         socket.emit('send ships', tr_ship_1_arr, tr_ship_2_arr);
 
+        if(enemyShipsArr.ship1===undefined){
+            console.log('enemy ships arr undefined');
+            
+        }
+        else{
+            enemyShipsList = enemyShipsArr.ship1.concat(enemyShipsArr.ship2);
+        }
+
         document.getElementById('field2').style.display = 'block';
         // document.getElementById('turn').style.display = 'block';------------
         
@@ -242,31 +250,15 @@
         // document.getElementById('turn').innerText='Enemy turn'; -------------------------
         
         socket.emit('send ships', tr_ship_1_arr, tr_ship_2_arr);
-
-        enemyShipsList = enemyShipsArr.ship1.concat(enemyShipsArr.ship2);
         
-
-        if(checkWinArr.length===enemyShipsList.length){
-            // document.getElementById('win_text').style.display='block';
-            alert('You win!');
-        }
-
-        // Array.from(document.getElementsByClassName("cell_2"))
-        // .forEach((element) => {
-        //     element.onclick = 
-        //     function (event) {
-        //         document.getElementById('turn').innerText='Your turn';
-        //         element.classList.remove('cell_disabled');
-                
-        //     }
-        // });
-
-        // Array.from(document.getElementsByClassName("cell_2"))
-        // .forEach((element) => {
-        //     element.addEventListener('click', (event)=>{
-        //         element.classList.remove('cell_disabled');
-        //     })
-        // });
+        setTimeout(()=>{
+          let cell_2 = Array.from(document.getElementsByClassName("cell_2"));
+            cell_2.forEach((element)=>{
+                element.classList.remove('cell_disabled');
+                console.log('cell enabled');
+            });  
+        } ,4000);
+        
             
     }
 
@@ -282,20 +274,20 @@
             checkWinArr.push(el.slice(0,7)+'_1');
 
             // document.getElementById('turn').innerText='Your turn'; ------------------
-            
+            if(checkWinArr.length===enemyShipsList.length){
+                // document.getElementById('win_text').style.display='block';
+                alert('You win!');
+            }
             
         }
         else if(enemyShipsArr.ship1.indexOf(el.slice(0,7)+'_1') <= 0 || enemyShipsArr.ship2.indexOf(el.slice(0,7)+'_1') <= 0){
             document.getElementById(el).style.backgroundColor='gray';
-            // Array.from(document.getElementsByClassName("cell_2"))
-            // .forEach((element) => {
-            //     element.onclick = 
-            //     function (event) {
-            //         event.preventDefault();
-            //         element.classList.add('cell_disabled');
-            //     }
-            // });
-
+            
+            let cell_2 = Array.from(document.getElementsByClassName("cell_2"));
+            cell_2.forEach((element)=>{
+                element.classList.add('cell_disabled');
+            });
+            
 
             turn();  
         }
